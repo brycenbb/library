@@ -1,6 +1,8 @@
 * {
     padding: 0;
     margin: 0;
+    overscroll-behavior: none;
+
 }
 
 body {
@@ -9,15 +11,60 @@ body {
     height: 100vh;
     display: grid;
     place-items: center;
+    /* overflow: hidden; */
+    overscroll-behavior: none;
+    /* position: relative; */
 }
 
-.container {
-    width: 90%;
-    height: 90%;
+.wrapper {
+    /* position: absolute; */
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-rows: 70px 1fr; 
+    gap: 10px;
+    background-color: #1E555C;
+    overflow: auto;
+}
+.header {
+    background-color: #3A2E39;
+    position: static;
     display: flex;
-    gap: 30px;
-    justify-content: center;
     align-items: center;
+    justify-content: space-between;
+    /* width: 90%; */
+    /* height: 100px; */
+}
+.header > button {
+    background-color: #F4D8CD;
+    font-size: 1.2rem;
+    border-radius: 8px;
+    border:none;
+    padding:10px;
+    transition: 200ms all ease-in-out;
+}
+.header > button:hover {
+    background-color: #EDB183;
+    transform: scale(1.1);
+}
+.title {
+    color: white;
+    padding-left: 60px;
+    font-size: 1.8rem;
+}
+.ignore {
+    visibility: hidden;
+    font-size: 1.8rem;
+    padding-right: 60px;
+
+}
+.container {
+    display: grid;
+    gap: 30px;
+    place-items: center;
+    grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+    resize:both;
+    padding: 30px;
 }
 
 .card {
@@ -26,9 +73,64 @@ body {
     max-width: 500px;
     max-height: 500px;
     flex: 1;
-    background-color: blue;
+    background-color: #EDB183;
     display:grid;
     place-items:center;
-    color:white;
+    color:black;
     font-size: 20px;
+}
+
+form {
+    position: absolute;
+    width: 60%;
+    height: 80%;
+    background-color: tomato;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.hide {
+    visibility: hidden;
+}
+
+form > button {
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 8px;
+    border:none;
+    padding:10px;
+}
+
+.radio {
+    width: 30%;
+    display: flex;
+    justify-content: space-between;
+}
+form > div {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.radio > div {
+    display: grid;
+    place-items: center;
+    grid-template-columns: 20px 1fr;
+}
+
+#status1,
+#status2 {
+    width:18px;
+    height:18px;
+}
+
+input[type="text"],
+input[type="number"]{
+    height: 1.5rem;
 }
