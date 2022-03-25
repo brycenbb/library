@@ -82,19 +82,24 @@ body {
 
 form {
     position: absolute;
-    width: 60%;
-    height: 80%;
-    background-color: tomato;
+    width: 40%;
+    height: 60%;
+    background-color: #F4D8CD;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
     font-size: 1.5rem;
     font-weight: bold;
+    transition: all 0.3s;
+    opacity: 1;
+    border: solid #3A2E39 5px;
+    border-radius: 10px;
 }
 
 .hide {
     visibility: hidden;
+    opacity: 0;
 }
 
 form > button {
@@ -122,6 +127,18 @@ form > div {
     display: grid;
     place-items: center;
     grid-template-columns: 20px 1fr;
+}
+
+.read {
+    background-color: lightgreen;
+    transition: all 150ms;
+    width:150px;
+}
+
+.notread {
+    background-color: tomato;
+    transition: all 150ms;
+    width:150px;
 }
 
 #status1,
