@@ -47,17 +47,22 @@ const container = document.querySelector(".container");
 let readStatus = true;
 
 for(let i = 0; i < myLibrary.length;i++) {
-    console.log("here");
     let bookcard = document.createElement("div");
     bookcard.classList.add("card");
     bookcard.textContent = myLibrary[i].info();
     container.appendChild(bookcard);
 }
 
+document.getElementById('submit').addEventListener('click', function(e) {
+    e.preventDefault();
+    formSubmitted();
+});
+
 function formSubmitted() {
     console.log("I made it here wooooooo");
     const form = document.querySelector("form");
     form.classList.add('hide');
+    form.reset();
 
 }
 

@@ -9,7 +9,7 @@
     <script src="javas.js" defer></script>
 </head>
 <body>
-    <form onsubmit="formSubmitted()" class="hide"> 
+    <form class="hide"> 
         <div>
             <label for="booktitle">Book Title:</label>
             <input type="text" id="booktitle" required>
@@ -23,19 +23,9 @@
             <input type="number" id="pages" required>
         </div>
 
-        <!-- <div class="radio">
-            <div>
-                <input type="radio" id="status1" name="readstatus" required>
-                <label for="status1">Read</label>
-            </div>
-            <div>
-                <input type="radio" id="status2" name="readstatus" required>
-                <label for="status2">Not Read</label>
-            </div>
-        </div> -->
         <button class="read">Read</button>
 
-        <button type="submit">Submit</button>
+        <button type="submit" id="submit">Submit</button>
     </form>
 
     <div class="wrapper">
