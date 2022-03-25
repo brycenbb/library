@@ -44,6 +44,8 @@ book9.addBookToLibrary();
 
 
 const container = document.querySelector(".container");
+let readStatus = true;
+
 for(let i = 0; i < myLibrary.length;i++) {
     console.log("here");
     let bookcard = document.createElement("div");
@@ -63,3 +65,19 @@ function newForm() {
     const form = document.querySelector("form");
     form.classList.remove('hide');
 }
+
+const statusbutton = document.querySelector(".read");
+statusbutton.addEventListener('click', function() {
+    if(readStatus){
+        readStatus = false;
+        statusbutton.textContent = "Not Read"
+        statusbutton.classList.remove('read');
+        statusbutton.classList.add('notread');
+    }
+    else{
+        readStatus = true;
+        statusbutton.textContent = "Read"
+        statusbutton.classList.remove('notread');
+        statusbutton.classList.add('read');
+    }
+})
