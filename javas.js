@@ -21,6 +21,12 @@ Book.prototype.addBookToLibrary = function() {
 }
 
 
+
+//Should introduce a counter and book_id element so that I can find the books later on. I
+//Could, for example, make the cards have the id with counter and use that to delete the cards
+//I dont want anymore
+
+
 // This is creating a few trial books to see if it works
 let book1 = new Book("test1","bry",10,true);
 let book2 = new Book("test2","bry",20,false);
