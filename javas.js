@@ -53,13 +53,23 @@ for(let i = 0; i < myLibrary.length;i++) {
     container.appendChild(bookcard);
 }
 
-document.getElementById('submit').addEventListener('click', function(e) {
-    e.preventDefault();
-    formSubmitted();
-});
+console.log(document.getElementById('submit'));
+// document.getElementById('submit').addEventListener('submit', function(e) {
+//     console.log("Event listener for submit button");
 
-function formSubmitted() {
+//     e.preventDefault();
+//     formSubmitted();
+// });
+
+document.getElementById('submit').addEventListener('submit', formSubmitted);
+
+
+
+function formSubmitted(event) {
     console.log("I made it here wooooooo");
+
+    event.preventDefault();
+    console.log("222I made it here wooooooo");
     const form = document.querySelector("form");
     form.classList.add('hide');
     form.reset();
