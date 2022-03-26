@@ -76,7 +76,6 @@ body {
     min-height: 200px;
     max-width: 500px;
     max-height: 500px;
-    flex: 1;
     background-color: #EDB183;
     display:grid;
     place-items:center;
@@ -85,9 +84,16 @@ body {
     font-size: 20px;
     border-radius: 10px;
     border: solid #3A2E39 3px;
+    transition: 200ms all ease-in-out;
 
 }
 
+.card:hover {
+    /* transition: 200ms all ease-in-out; */
+    box-shadow: 4px 4px 4px black;
+    transform: scale(1.05);
+
+}
 form {
     position: absolute;
     width: 40%;
@@ -103,6 +109,7 @@ form {
     opacity: 1;
     border: solid #3A2E39 5px;
     border-radius: 10px;
+    z-index: 10;
 }
 
 .hide {
