@@ -61,14 +61,17 @@ console.log(document.getElementById('submit'));
 //     formSubmitted();
 // });
 
-document.getElementById('submit').addEventListener('submit', formSubmitted);
-
-
-
-function formSubmitted(event) {
-    console.log("I made it here wooooooo");
-
+document.getElementById('form').addEventListener('submit', function(event){
+    console.log("Event listener for submit button");
     event.preventDefault();
+    event.stopPropagation();
+    formSubmitted();
+});
+
+
+
+function formSubmitted() {
+    console.log("I made it here wooooooo");
     console.log("222I made it here wooooooo");
     const form = document.querySelector("form");
     form.classList.add('hide');
