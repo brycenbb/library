@@ -209,7 +209,9 @@ form > div {
 #rating:invalid {
     border-color: tomato;
 }
-
+#pages:invalid {
+    border-color: tomato;
+}
 .radio > div {
     display: grid;
     place-items: center;
