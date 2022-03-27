@@ -81,16 +81,16 @@ function formSubmitted() {
     form.classList.add('hide');
     //Processing form information. Title should be 25 characters before introducing a box?
     let inputs = document.getElementById("form").elements;
-    console.log(inputs);
+    // console.log(inputs);
     // Author
     if(inputs[2].value === ""){
         inputs[2].value = "Unknown1"
     }    
     // Page count
     if(inputs[3].value === ""){
-        console.log("page statement set to unknown")
+        // console.log("page statement set to unknown")
         inputs[3].value =99999;
-        console.log(inputs[2].value);
+        // console.log(inputs[2].value);
 
         //input is number only, so it can only accept numbers as a value, not strings.
     } 
@@ -105,11 +105,6 @@ function formSubmitted() {
     // container.appendChild(bookcard);
 
     newCard(new Book(inputs[1].value,inputs[2].value,inputs[3].value,inputs[5].value));
-
-    // console.log(inputs[0].value);
-    // console.log(inputs[1].value);
-    // console.log(inputs[2].value);
-    // console.log(inputs[3].value);
 
     form.reset();
 
@@ -130,43 +125,72 @@ function newCard(Book) {
     let pagediv = document.createElement("div");
     //child4
     let readbutton = document.createElement("button");
+
+    //Absolute child
+    let cancelbutton = document.createElement("button");
+
+    cancelbutton.type = "button";
+    cancelbutton.classList.add('cardcancel');
+    cancelbutton.textContent = "X";
+    cancelbutton.addEventListener('click',function() {
+        cancelbutton.parentNode.remove();
+    });
+
+    readbutton.type = "button";
     titlediv.classList.add('booktitle');
     bookcard.classList.add("card");
-    readbutton.classList.add("cardbutton");
+    readbutton.classList.add('cardbutton')
     titlediv.textContent = Book.title;
     authordiv.textContent = Book.author;
     pagediv.textContent = Book.pages;
-
     readbutton.value = Book.read;
-    if(Book.read){
+ 
+
+
+    if(readbutton.value === "true"){
+        readbutton.classList.add('cardbuttonTrue');
         readbutton.textContent = "Read";
     }
-    else {
+    else{
+        readbutton.classList.add('cardbuttonFalse');
         readbutton.textContent = "Not Read";
+
     }
+    readbutton.addEventListener('click', function() {
+        if(readbutton.value === "true"){
+            readbutton.textContent = "Not Read"
+            readbutton.classList.remove('cardbuttonTrue');
+            readbutton.classList.add('cardbuttonFalse');
+            readbutton.value = "false";
+        }
+        else{
+            readbutton.textContent = "Read"
+            readbutton.classList.remove('cardbuttonFalse');
+            readbutton.classList.add('cardbuttonTrue');
+            readbutton.value = "true";
+        }
+    });
 
     bookcard.appendChild(titlediv);
     bookcard.appendChild(authordiv);
     bookcard.appendChild(pagediv);
     bookcard.appendChild(readbutton);
-
+    bookcard.appendChild(cancelbutton);
     container.appendChild(bookcard);
 }
 
 const statusbutton = document.querySelector(".read");
 statusbutton.addEventListener('click', function() {
-    if(readStatus){
-        readStatus = false;
+    if(statusbutton.value === "true"){
         statusbutton.textContent = "Not Read"
         statusbutton.classList.remove('read');
         statusbutton.classList.add('notread');
         statusbutton.value = "false";
     }
     else{
-        readStatus = true;
         statusbutton.textContent = "Read"
         statusbutton.classList.remove('notread');
         statusbutton.classList.add('read');
         statusbutton.value = "true";
     }
-})
+});

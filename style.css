@@ -88,6 +88,7 @@ body {
     border: solid #3A2E39 3px;
     transition: 200ms all ease-in-out;
     padding: 10px;
+    position: relative;
 }
 
 .booktitle {
@@ -152,14 +153,35 @@ form > div > button {
     justify-content: center;
     align-items: center;
     position:absolute;
-    margin: 3px;
+    margin: 4px;
     top: 0px;
     right: 0px;
+    border: none;
     border-radius: 30%;
     height: 40px;
     width: 40px;
 }
 
+.cardcancel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position:absolute;
+    margin: 5px;
+    top: 0px;
+    right: 0px;
+    border: none;
+    border-radius: 30%;
+    height: 20px;
+    width: 20px;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.cardcancel:hover {
+    background-color: black;
+    color: #e9e9ed;
+}
 .cancel > #text {
     height: max-content;
 }
@@ -198,10 +220,24 @@ form > div {
     transition: all 150ms;
     width:12rem;
 }
-
 .cardbutton {
+    font-size: 15px;
+    border: none;
+    padding: 5px;
+}
+.cardbuttonTrue {
     width: 10rem;
     background-color: lightgreen;
+    transition: all 150ms;
+    border-radius: 8px;
+}
+
+.cardbuttonFalse {
+    width: 10rem;
+    transition: all 150ms;
+    background-color: tomato;
+    border-radius: 8px;
+
 }
 #status1,
 #status2 {
