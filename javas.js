@@ -59,6 +59,9 @@ for(let i = 0; i < myLibrary.length;i++) {
     container.appendChild(bookcard);
 }
 
+
+
+//Form submission default action override
 document.getElementById('form').addEventListener('submit', function(event){
     event.preventDefault();
     event.stopPropagation();
@@ -66,40 +69,47 @@ document.getElementById('form').addEventListener('submit', function(event){
 });
 
 
+//Cancel button functionality
+document.querySelector(".cancel").addEventListener('click',function() {
+    form.classList.add('hide');
+    form.reset();
+});
+
 
 function formSubmitted() {
     const form = document.querySelector("form");
     form.classList.add('hide');
-    //Processing form information
+    //Processing form information. Title should be 25 characters before introducing a box?
     let inputs = document.getElementById("form").elements;
     console.log(inputs);
     // Author
-    if(inputs[1].value === ""){
-        inputs[1].value = "Unknown1"
+    if(inputs[2].value === ""){
+        inputs[2].value = "Unknown1"
     }    
     // Page count
-    if(inputs[2].value === ""){
+    if(inputs[3].value === ""){
         console.log("page statement set to unknown")
-        inputs[2].value =99999;
+        inputs[3].value =99999;
         console.log(inputs[2].value);
 
         //input is number only, so it can only accept numbers as a value, not strings.
     } 
     //Genre
-    if(inputs[3].value === ""){
-        inputs[3].value = "Unknown3"
+    if(inputs[4].value === ""){
+        inputs[4].value = "Unknown3"
     }
-    let bookcard = document.createElement("div");
-    bookcard.classList.add("card");
-    bookcard.textContent = new Book(inputs[0].value,inputs[1].value,inputs[2].value,inputs[4].value).info();
-    container.appendChild(bookcard);
+
+    // let bookcard = document.createElement("div");
+    // bookcard.classList.add("card");
+    // bookcard.textContent = new Book(inputs[1].value,inputs[2].value,inputs[3].value,inputs[5].value).info();
+    // container.appendChild(bookcard);
+
+    newCard(new Book(inputs[1].value,inputs[2].value,inputs[3].value,inputs[5].value));
+
     // console.log(inputs[0].value);
     // console.log(inputs[1].value);
     // console.log(inputs[2].value);
     // console.log(inputs[3].value);
-
-
-
 
     form.reset();
 
@@ -109,6 +119,38 @@ function formSubmitted() {
 function newForm() {
     const form = document.querySelector("form");
     form.classList.remove('hide');
+}
+function newCard(Book) {
+    let bookcard = document.createElement("div");
+    //child1
+    let titlediv = document.createElement("div");
+    //child2
+    let authordiv = document.createElement("div");
+    //child3
+    let pagediv = document.createElement("div");
+    //child4
+    let readbutton = document.createElement("button");
+    titlediv.classList.add('booktitle');
+    bookcard.classList.add("card");
+    readbutton.classList.add("cardbutton");
+    titlediv.textContent = Book.title;
+    authordiv.textContent = Book.author;
+    pagediv.textContent = Book.pages;
+
+    readbutton.value = Book.read;
+    if(Book.read){
+        readbutton.textContent = "Read";
+    }
+    else {
+        readbutton.textContent = "Not Read";
+    }
+
+    bookcard.appendChild(titlediv);
+    bookcard.appendChild(authordiv);
+    bookcard.appendChild(pagediv);
+    bookcard.appendChild(readbutton);
+
+    container.appendChild(bookcard);
 }
 
 const statusbutton = document.querySelector(".read");

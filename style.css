@@ -4,7 +4,7 @@
     padding: 0;
     margin: 0;
     overscroll-behavior: none;
-
+    font-family: Arial, Helvetica, sans-serif;
 }
 .colorpallet {
     color: #3A2E39;
@@ -81,24 +81,28 @@ body {
     display:grid;
     place-items:center;
     text-align: center;
+    grid-template-columns: 1fr;
     color:black;
     font-size: 20px;
     border-radius: 10px;
     border: solid #3A2E39 3px;
     transition: 200ms all ease-in-out;
-
+    padding: 10px;
 }
 
+.booktitle {
+    font-style: italic;
+}
 .card:hover {
     /* transition: 200ms all ease-in-out; */
     box-shadow: 4px 4px 4px black;
     transform: scale(1.05);
-
 }
+
 form {
     position: absolute;
-    width: 40%;
-    height: 60%;
+    width: 30%;
+    height: 65%;
     background-color: #F4D8CD;
     display: flex;
     flex-direction: column;
@@ -112,18 +116,56 @@ form {
     border-radius: 10px;
     z-index: 10;
 }
-
+input::placeholder {
+    text-align: center;
+}
+input {
+    padding: 5px;
+    font-size: 1.4rem;
+    text-align: center;
+    border-radius: 10px;
+    border: 2px solid #e9e9ed;
+}
 .hide {
     visibility: hidden;
     opacity: 0;
 }
 
 form > button {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     font-weight: bold;
     border-radius: 8px;
     border:none;
     padding:10px;
+}
+
+form > div > button {
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 8px;
+    border:none;
+    padding:10px 20px;
+}
+
+.cancel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position:absolute;
+    margin: 3px;
+    top: 0px;
+    right: 0px;
+    border-radius: 30%;
+    height: 40px;
+    width: 40px;
+}
+
+.cancel > #text {
+    height: max-content;
+}
+.cancel:hover {
+    background-color: black;
+    color: #e9e9ed;
 }
 
 .radio {
@@ -148,15 +190,19 @@ form > div {
 .read {
     background-color: lightgreen;
     transition: all 150ms;
-    width:150px;
+    width:12rem;
 }
 
 .notread {
     background-color: tomato;
     transition: all 150ms;
-    width:150px;
+    width:12rem;
 }
 
+.cardbutton {
+    width: 10rem;
+    background-color: lightgreen;
+}
 #status1,
 #status2 {
     width:18px;
