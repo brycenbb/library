@@ -57,6 +57,11 @@ document.querySelector(".cancel").addEventListener('click',function() {
     form.reset();
 });
 
+const removeChilds = (parent) => {
+    while (parent.lastChild) {
+        parent.removeChild(parent.lastChild);
+    }
+};
 
 function formSubmitted() {
     const form = document.querySelector("form");
@@ -158,11 +163,21 @@ function newCard(Book) {
         readbutton.textContent = "Not Read";
 
     }
+
     readbutton.addEventListener('click', function() {
         if(readbutton.value === "true"){
             readbutton.textContent = "Not Read"
             readbutton.classList.remove('cardbuttonTrue');
             readbutton.classList.add('cardbuttonFalse');
+            let readParent = readbutton.parentNode;
+            let currentRating = readParent.querySelector(".ratingdiv");
+            console.log(currentRating);
+            removeChilds(currentRating);
+            let unrating = document.createElement('div');
+            unrating.textContent = "Unrated";
+            currentRating.appendChild(unrating);
+            currentRating.style.color = "grey";
+
             readbutton.value = "false";
         }
         else{
@@ -175,11 +190,12 @@ function newCard(Book) {
 
     if(Book.rating === "Unrated"){
         ratingdiv.textContent = Book.rating;
+        ratingdiv.classList.add('ratingdiv');
         ratingdiv.style.color = "grey";
     }
     else{
         let counter;
-
+        ratingdiv.classList.add('ratingdiv');
         for(counter=0; counter < Book.rating; counter++){
             let starfilled = document.createElement('img');
             starfilled.src = 'stars/star.svg';
@@ -214,6 +230,7 @@ function newCard(Book) {
 
 const statusbutton = document.querySelector(".read");
 const ratingbox = document.getElementById("rating");
+
 statusbutton.addEventListener('click', function() {
     if(statusbutton.value === "true"){
         statusbutton.textContent = "Not Read"
