@@ -31,40 +31,16 @@ Book.prototype.addBookToLibrary = function() {
 
 
 // This is creating a few trial books to see if it works
-let book1 = new Book("test1","katie",10,"romance",true,4);
+let book1 = new Book("test1","katie",10,"romance",true,"Unrated");
 let book2 = new Book("test2","bry",20,"teen",false,3);
 let book3 = new Book("test3","josh",30,"children",true,2);
 let book4 = new Book("test4","gio",30,"fantasy",true,1.5);
-// let book5 = new Book("test5","bry",30,true);
-// let book6 = new Book("test6","bry",30,true);
-// let book7 = new Book("test7","bry",30,true);
-// let book8 = new Book("test8","bry",30,true);
-// let book9 = new Book("test9","bry",30,true);
 
-// book1.addBookToLibrary();
-// book2.addBookToLibrary();
-// book3.addBookToLibrary();
-// book4.addBookToLibrary();
 
 newCard(book1);
 newCard(book2);
 newCard(book3);
 newCard(book4);
-// book5.addBookToLibrary();
-// book6.addBookToLibrary();
-// book7.addBookToLibrary();
-// book8.addBookToLibrary();
-// book9.addBookToLibrary();
-
-
-
-// for(let i = 0; i < myLibrary.length;i++) {
-//     let bookcard = document.createElement("div");
-//     bookcard.classList.add("card");
-//     bookcard.textContent = myLibrary[i].info();
-//     container.appendChild(bookcard);
-// }
-
 
 
 //Form submission default action override
@@ -88,7 +64,8 @@ function formSubmitted() {
     //Processing form information. Title should be 25 characters before introducing a box?
     let inputs = document.getElementById("form").elements;
     let pagecatcher = inputs[3].value;
-    // console.log(inputs);
+    let ratingcatcher = inputs[5].value;
+    console.log(inputs);
     // Title handling
     if(inputs[1].value.length > 25) {
         inputs[1].value = inputs[1].value.substr(0,22) + "...";
@@ -106,13 +83,17 @@ function formSubmitted() {
     if(inputs[4].value === ""){
         inputs[4].value = "Unknown genre"
     }
+    //Rating
+    if(inputs[5].value===""){
+        ratingcatcher = "Unrated"
+    }
 
     // let bookcard = document.createElement("div");
     // bookcard.classList.add("card");
     // bookcard.textContent = new Book(inputs[1].value,inputs[2].value,inputs[3].value,inputs[5].value).info();
     // container.appendChild(bookcard);
 
-    newCard(new Book(inputs[1].value,inputs[2].value,pagecatcher,inputs[4].value,inputs[5].value));
+    newCard(new Book(inputs[1].value,inputs[2].value,pagecatcher,inputs[4].value,inputs[6].value,ratingcatcher));
 
     form.reset();
 
@@ -135,6 +116,9 @@ function newCard(Book) {
     let genrediv = document.createElement("div");
     //child5
     let readbutton = document.createElement("button");
+    //child6
+    let ratingdiv = document.createElement('div');
+
 
     //Absolute positioned child
     let cancelbutton = document.createElement("button");
@@ -154,7 +138,7 @@ function newCard(Book) {
     authordiv.textContent = Book.author;
     genrediv.textContent = Book.genre;
 
-    if(Number.isInteger(Book.pages)){
+    if(Number.isInteger(Number(Book.pages))){
         pagediv.textContent = Book.pages + " pages";
     }
     else {
@@ -189,17 +173,38 @@ function newCard(Book) {
         }
     });
 
-    let staroutline = document.createElement('img');
-    staroutline.src= 'stars/star-outline.svg';
+    if(Book.rating === "Unrated"){
+        ratingdiv.textContent = Book.rating;
+        ratingdiv.style.color = "grey";
+    }
+    else{
+        let counter;
 
+        for(counter=0; counter < Book.rating; counter++){
+            let starfilled = document.createElement('img');
+            starfilled.src = 'stars/star.svg';
+            ratingdiv.appendChild(starfilled);
+        }
+        if(Book.rating % 1 != 0){
+            let starhalf = document.createElement('img');
+            starhalf.src = 'stars/star-half.svg';
+            ratingdiv.appendChild(starhalf);
+            counter++;
+        }
+        for(counter; counter < 5; counter++) {
+            let staroutline = document.createElement('img');
+            staroutline.src= 'stars/star-outline.svg';
+            ratingdiv.appendChild(staroutline);
+        }
 
+    }    
 
     bookcard.appendChild(titlediv);
     bookcard.appendChild(authordiv);
     bookcard.appendChild(pagediv);
     bookcard.appendChild(genrediv);
 
-    bookcard.appendChild(staroutline);
+    bookcard.appendChild(ratingdiv);
 
     bookcard.appendChild(readbutton);
     bookcard.appendChild(cancelbutton);
@@ -208,18 +213,22 @@ function newCard(Book) {
 }
 
 const statusbutton = document.querySelector(".read");
+const ratingbox = document.getElementById("rating");
 statusbutton.addEventListener('click', function() {
     if(statusbutton.value === "true"){
         statusbutton.textContent = "Not Read"
         statusbutton.classList.remove('read');
         statusbutton.classList.add('notread');
         statusbutton.value = "false";
+        ratingbox.type = "hidden";
+        ratingbox.value = "";
     }
     else{
         statusbutton.textContent = "Read"
         statusbutton.classList.remove('notread');
         statusbutton.classList.add('read');
         statusbutton.value = "true";
+        ratingbox.type = "number";
     }
 });
 

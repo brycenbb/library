@@ -91,6 +91,9 @@ body {
     position: relative;
 }
 
+.card > * {
+    text-transform: capitalize;
+}
 .booktitle {
     font-style: italic;
 }
