@@ -3,4 +3,4 @@ This project was my first real attempt at working with broader transiton animati
 and also included my first color scheme. Design principles as of now have not been implemented. As this project was to gain familarity with prototypes, 
 I will revist this project to better use prototypes, add a simple backend, and refactor with proper design princples.
 
-Live page: 
+Live page: [Here](https://brycenbb.github.io/library/)
