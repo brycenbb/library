@@ -31,8 +31,8 @@ Book.prototype.addBookToLibrary = function() {
 
 
 // This is creating a few trial books to see if it works
-let book1 = new Book("test1","katie",10,"romance",true,"Unrated");
-let book2 = new Book("test2","bry",20,"teen",false,3);
+let book1 = new Book("test1","katie",10,"romance",false,"Unrated");
+let book2 = new Book("test2","bry",20,"teen",true,3);
 let book3 = new Book("test3","josh",30,"children",true,2);
 let book4 = new Book("test4","gio",30,"fantasy",true,1.5);
 
@@ -171,7 +171,7 @@ function newCard(Book) {
             readbutton.classList.add('cardbuttonFalse');
             let readParent = readbutton.parentNode;
             let currentRating = readParent.querySelector(".ratingdiv");
-            console.log(currentRating);
+            // console.log(currentRating);
             removeChilds(currentRating);
             let unrating = document.createElement('div');
             unrating.textContent = "Unrated";
@@ -194,14 +194,16 @@ function newCard(Book) {
         ratingdiv.style.color = "grey";
     }
     else{
-        let counter;
+        let counter = 0;
+        console.log(Book.rating);
         ratingdiv.classList.add('ratingdiv');
-        for(counter=0; counter < Book.rating; counter++){
+        for(counter=0; counter < Math.floor(Book.rating); counter++){
             let starfilled = document.createElement('img');
             starfilled.src = 'stars/star.svg';
             ratingdiv.appendChild(starfilled);
         }
         if(Book.rating % 1 != 0){
+            console.log(counter);
             let starhalf = document.createElement('img');
             starhalf.src = 'stars/star-half.svg';
             ratingdiv.appendChild(starhalf);
