@@ -67,7 +67,7 @@ body {
     display: grid;
     gap: 30px;
     place-items: center;
-    grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+    grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
     resize:both;
     padding: 30px;
 }

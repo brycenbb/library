@@ -1,10 +1,13 @@
 let myLibrary = [];
+const container = document.querySelector(".container");
 
-function Book(title, author, pages, read) {
+function Book(title, author, pages, genre, read,rating) {
   this.title = title;
   this.author = author;
   this.pages = pages;
+  this.genre = genre;
   this.read = read;
+  this.rating = rating;
 }
 
 Book.prototype.info = function() {
@@ -28,36 +31,39 @@ Book.prototype.addBookToLibrary = function() {
 
 
 // This is creating a few trial books to see if it works
-let book1 = new Book("test1","bry",10,true);
-let book2 = new Book("test2","bry",20,false);
-let book3 = new Book("test3","bry",30,true);
-let book4 = new Book("test4","bry",30,true);
-let book5 = new Book("test5","bry",30,true);
-let book6 = new Book("test6","bry",30,true);
-let book7 = new Book("test7","bry",30,true);
-let book8 = new Book("test8","bry",30,true);
-let book9 = new Book("test9","bry",30,true);
+let book1 = new Book("test1","katie",10,"romance",true,4);
+let book2 = new Book("test2","bry",20,"teen",false,3);
+let book3 = new Book("test3","josh",30,"children",true,2);
+let book4 = new Book("test4","gio",30,"fantasy",true,1.5);
+// let book5 = new Book("test5","bry",30,true);
+// let book6 = new Book("test6","bry",30,true);
+// let book7 = new Book("test7","bry",30,true);
+// let book8 = new Book("test8","bry",30,true);
+// let book9 = new Book("test9","bry",30,true);
 
-book1.addBookToLibrary();
-book2.addBookToLibrary();
-book3.addBookToLibrary();
-book4.addBookToLibrary();
-book5.addBookToLibrary();
-book6.addBookToLibrary();
-book7.addBookToLibrary();
-book8.addBookToLibrary();
-book9.addBookToLibrary();
+// book1.addBookToLibrary();
+// book2.addBookToLibrary();
+// book3.addBookToLibrary();
+// book4.addBookToLibrary();
+
+newCard(book1);
+newCard(book2);
+newCard(book3);
+newCard(book4);
+// book5.addBookToLibrary();
+// book6.addBookToLibrary();
+// book7.addBookToLibrary();
+// book8.addBookToLibrary();
+// book9.addBookToLibrary();
 
 
-const container = document.querySelector(".container");
-let readStatus = true;
 
-for(let i = 0; i < myLibrary.length;i++) {
-    let bookcard = document.createElement("div");
-    bookcard.classList.add("card");
-    bookcard.textContent = myLibrary[i].info();
-    container.appendChild(bookcard);
-}
+// for(let i = 0; i < myLibrary.length;i++) {
+//     let bookcard = document.createElement("div");
+//     bookcard.classList.add("card");
+//     bookcard.textContent = myLibrary[i].info();
+//     container.appendChild(bookcard);
+// }
 
 
 
@@ -81,22 +87,24 @@ function formSubmitted() {
     form.classList.add('hide');
     //Processing form information. Title should be 25 characters before introducing a box?
     let inputs = document.getElementById("form").elements;
+    let pagecatcher = inputs[3].value;
     // console.log(inputs);
+    // Title handling
+    if(inputs[1].value.length > 25) {
+        inputs[1].value = inputs[1].value.substr(0,22) + "...";
+    }
     // Author
     if(inputs[2].value === ""){
-        inputs[2].value = "Unknown1"
+        inputs[2].value = "Unknown author"
     }    
     // Page count
     if(inputs[3].value === ""){
         // console.log("page statement set to unknown")
-        inputs[3].value =99999;
-        // console.log(inputs[2].value);
-
-        //input is number only, so it can only accept numbers as a value, not strings.
+        pagecatcher = "Unknown page count";
     } 
     //Genre
     if(inputs[4].value === ""){
-        inputs[4].value = "Unknown3"
+        inputs[4].value = "Unknown genre"
     }
 
     // let bookcard = document.createElement("div");
@@ -104,7 +112,7 @@ function formSubmitted() {
     // bookcard.textContent = new Book(inputs[1].value,inputs[2].value,inputs[3].value,inputs[5].value).info();
     // container.appendChild(bookcard);
 
-    newCard(new Book(inputs[1].value,inputs[2].value,inputs[3].value,inputs[5].value));
+    newCard(new Book(inputs[1].value,inputs[2].value,pagecatcher,inputs[4].value,inputs[5].value));
 
     form.reset();
 
@@ -124,9 +132,11 @@ function newCard(Book) {
     //child3
     let pagediv = document.createElement("div");
     //child4
+    let genrediv = document.createElement("div");
+    //child5
     let readbutton = document.createElement("button");
 
-    //Absolute child
+    //Absolute positioned child
     let cancelbutton = document.createElement("button");
 
     cancelbutton.type = "button";
@@ -142,7 +152,15 @@ function newCard(Book) {
     readbutton.classList.add('cardbutton')
     titlediv.textContent = Book.title;
     authordiv.textContent = Book.author;
-    pagediv.textContent = Book.pages;
+    genrediv.textContent = Book.genre;
+
+    if(Number.isInteger(Book.pages)){
+        pagediv.textContent = Book.pages + " pages";
+    }
+    else {
+        pagediv.textContent = Book.pages;
+
+    }
     readbutton.value = Book.read;
  
 
@@ -171,11 +189,21 @@ function newCard(Book) {
         }
     });
 
+    let staroutline = document.createElement('img');
+    staroutline.src= 'stars/star-outline.svg';
+
+
+
     bookcard.appendChild(titlediv);
     bookcard.appendChild(authordiv);
     bookcard.appendChild(pagediv);
+    bookcard.appendChild(genrediv);
+
+    bookcard.appendChild(staroutline);
+
     bookcard.appendChild(readbutton);
     bookcard.appendChild(cancelbutton);
+    
     container.appendChild(bookcard);
 }
 
@@ -194,3 +222,4 @@ statusbutton.addEventListener('click', function() {
         statusbutton.value = "true";
     }
 });
+
