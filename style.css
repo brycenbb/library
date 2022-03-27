@@ -206,6 +206,10 @@ form > div {
     gap: 8px;
 }
 
+#rating:invalid {
+    border-color: tomato;
+}
+
 .radio > div {
     display: grid;
     place-items: center;
